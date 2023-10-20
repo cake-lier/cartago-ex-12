@@ -1,5 +1,49 @@
 mas hello_world {
-    agent hello_world_agent
+    agent announcer_agent
+    agent bidder_agent {
+        beliefs: bidder_id("0")
+                 accepted_task_types([0, 1])
+    }
+    agent bidder_agent {
+        beliefs: bidder_id("1")
+                 accepted_task_types([1, 2])
+    }
+    agent bidder_agent {
+        beliefs: bidder_id("2")
+                 accepted_task_types([0, 2])
+    }
+    agent bidder_agent {
+        beliefs: bidder_id("3")
+                 accepted_task_types([0, 1, 2])
+    }
+    agent bidder_agent {
+        beliefs: bidder_id("4")
+                 accepted_task_types([1])
+    }
+
+    /*
+        agent announcer_agent_solution
+        agent bidder_agent_solution {
+            beliefs: bidder_id("0")
+                     accepted_task_types([0, 1])
+        }
+        agent bidder_agent_solution {
+            beliefs: bidder_id("1")
+                     accepted_task_types([1, 2])
+        }
+        agent bidder_agent_solution {
+            beliefs: bidder_id("2")
+                     accepted_task_types([0, 2])
+        }
+        agent bidder_agent_solution {
+            beliefs: bidder_id("3")
+                     accepted_task_types([0, 1, 2])
+        }
+        agent bidder_agent_solution {
+            beliefs: bidder_id("4")
+                     accepted_task_types([1])
+        }
+    */
 
     asl-path: "src/main/jason"
     java-path: "src/main/cartago"
