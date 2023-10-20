@@ -11,19 +11,23 @@
     & .member(TaskType, TaskTypesList)
     & generator(RandomGenerator)
     & bidder_id(BidderId) <-
+    +contract_board(ContractBoardId);
     focus(ContractBoardId);
     cartago.invoke_obj(RandomGenerator, nextInt(10), RandomInt);
     Offer = RandomInt + 1;
     println("I, bidder ", BidderId, ", bid ", Offer, "€");
     bid(BidderId, Offer) [artifact_id(ContractBoardId)].
 
--!task(_, _) : bidder_id(BidderId) <-
+-!task(_, _) : bidder_id(BidderId) & contract_board(ContractBoardId) <-
+    stopFocus(ContractBoardId);
     println("I, bidder ", BidderId, ", submitted my bid too late!").
 
-+winner(BidderId) : bidder_id(BidderId) <-
++winner(BidderId) : bidder_id(BidderId) & contract_board(ContractBoardId) <-
+    stopFocus(ContractBoardId);
     println("I, bidder ", BidderId, ", won the bidding!").
 
-+winner(BidderId) : not bidder_id(BidderId) & bidder_id(MyBidderId) <-
++winner(BidderId) : not bidder_id(BidderId) & bidder_id(MyBidderId) & contract_board(ContractBoardId) <-
+    stopFocus(ContractBoardId);
     println("I, bidder ", MyBidderId, ", lost the bidding!").
 
 +!discoverTaskBoard(TaskBoardId) : true <-
